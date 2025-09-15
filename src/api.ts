@@ -137,6 +137,16 @@ export const addProps = (collection:any[], type:string) => {
   });
 };
 
+export const addSearchProps = (collection:any[]) => {
+  return collection.map((item) => {
+    return {
+      ...item, 
+      poster: item[media_type_profile_path[item.media_type]],
+      name: item[media_type_name[item.media_type]]
+    }
+  });
+};
+
 export const sortByProp = (collection:any[], prop:string) => {
   return collection.sort((a, b) => {
     return b[prop]-a[prop];
@@ -289,5 +299,6 @@ export type film = {
   duration?: string,
   ratingClass?: string,
   rating?: string
+  role?: string;
 };
 

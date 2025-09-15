@@ -6,7 +6,7 @@
   <div class="category-items">
     @for (item of items(); track item.id) {
       <a [routerLink]="['/movie', item.id]" class="category-item">
-        <poster path={{item.poster_path}} />
+        <poster path={{item.poster_path}} [size]="size" />
         <div class="desc">
           <div class="desc-name">{{item.title}}</div>
           @if (item.role) {<div class="desc-role">{{item.role}}</div>}

@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Component, input } from '@angular/core';
 import { Poster } from '../poster/poster';
+import { largest_size_map } from '../../../api';
 import type { person } from '../../../api';
 
 @Component({
@@ -12,7 +13,5 @@ import type { person } from '../../../api';
 export class People {
   name = input('');
   items = input<person[]>([]);
+  size = largest_size_map['person'];
 }
-
-// getRole(type, person)
-// largest_size_map.person
