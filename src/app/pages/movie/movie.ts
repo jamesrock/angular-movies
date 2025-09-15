@@ -1,0 +1,41 @@
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { Poster } from '../../componnts/poster/poster';
+import { CastAndCrew } from '../../componnts/cast-and-crew/cast-and-crew';
+import { Recommendations } from '../../componnts/recommendations/recommendations';
+import { Genres } from '../../componnts/genres/genres';
+import { toTime, floorRating, getRatingClass, api } from '../../../api';
+import type { film } from '../../../api';
+
+@Component({
+  selector: 'movie',
+  imports: [Poster, CastAndCrew, Recommendations, Genres],
+  templateUrl: './movie.html',
+  styleUrl: './movie.scss'
+})
+export class Movie implements OnInit {
+  private http = inject(HttpClient);
+  private activatedRoute = inject(ActivatedRoute);
+  id = signal('');
+  loaded = signal(false);
+  film = signal<film>({});
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.id.set(params.get('id') || '');
+      this.fetchData(params.get('id'));
+    });;
+  };
+  fetchData(id: string | null) {
+    this.loaded.set(false);
+    this.http.get(`https://api.themoviedb.org/3/movie/${id}`, api.fetch_options).subscribe((data: any) => {
+      this.film.set({
+        duration: toTime(data.runtime), 
+        rating: floorRating(data.vote_average), 
+        ratingClass: `rating ${getRatingClass(data.vote_average ?? 0)}`, 
+        ...data
+      });
+      this.loaded.set(true);
+    });
+  };
+}

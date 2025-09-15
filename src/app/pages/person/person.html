@@ -1,0 +1,10 @@
+<main>
+  @if (loaded()===true) {
+    <div class="person">
+      <h1>{{person().name}}</h1>
+      <poster path={{person().profile_path}} />
+      <p class="bio">{{person().biography}}</p>
+      <filmography id={{person().id}} />
+    </div>
+  }
+</main>

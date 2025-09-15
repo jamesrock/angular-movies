@@ -1,0 +1,5 @@
+<div class="genres">
+  @for (item of items(); track item.id) {
+    <a routerLink="/genre/{{item.id}}">{{item.name}}</a>
+  }
+</div>

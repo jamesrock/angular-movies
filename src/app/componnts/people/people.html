@@ -1,0 +1,16 @@
+<div class="category">
+  <div class="category-head">
+    <h2>{{name()}}</h2>
+  </div>
+  <div class="category-items">
+    @for (item of items(); track item.id) {
+      <a routerLink="/person/{{item.id}}" class="category-item">
+        <poster path={{item.profile_path}} />
+        <div class="desc">
+          <div class="desc-name">{{item.name}}</div>
+          <div class="desc-role">{{item.role}}</div>
+        </div>
+      </a>
+    }
+  </div>
+</div>
