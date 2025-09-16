@@ -1,8 +1,8 @@
 import { Component, signal, input, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Films } from '../films/films';
 import type { film } from '../../../api';
-import { dedupe, addProps, api } from '../../../api';
+import { dedupe, addProps } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'filmography',
@@ -10,16 +10,15 @@ import { dedupe, addProps, api } from '../../../api';
   templateUrl: './filmography.html'
 })
 export class Filmography {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   cast = signal<film[]>([]);
   crew = signal<film[]>([]);
   id = input('');
   ngOnInit(): void {
-    console.log('ngOnInit', this.id());
     this.fetchData(this.id());
   };
   fetchData(id: string) {
-    this.http.get(api.getFilmographyPath(id), api.fetch_options).subscribe((data: any) => {
+    this.http.getFilmography(id).subscribe((data: any) => {
       this.cast.set(addProps(dedupe(data.cast, 'cast'), 'cast'));
       this.crew.set(addProps(dedupe(data.crew, 'crew'), 'crew'));
     });

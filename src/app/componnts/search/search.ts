@@ -1,9 +1,10 @@
 import { Component, signal, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 import { Poster } from '../poster/poster';
-import { api, addSearchProps, addProp } from '../../../api';
+import { addSearchProps, addProp } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 type result = {
   id?: string;
@@ -21,7 +22,7 @@ const cache = {};
   styleUrl: './search.scss'
 })
 export class Search {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   results = signal<result[]>([]);
   query = new FormControl('');
   ngOnInit():void {
@@ -38,8 +39,12 @@ export class Search {
       this.results.set(cache[query]);
       return;
     };
-    this.http.get(`https://api.themoviedb.org/3/search/movie?query=${query}`, api.fetch_options).subscribe((data: any) => {
-      cache[query] = addSearchProps(addProp(data.results, 'media_type', 'movie'));
+    
+    const movieResults = this.http.getMovieResults(query);
+    const peopleResults = this.http.getPeopleResults(query);
+
+    forkJoin([movieResults, peopleResults]).subscribe(([movies, people]:any) => {
+      cache[query] = addSearchProps([...addProp(movies.results, 'media_type', 'movie'), ...addProp(people.results, 'media_type', 'person')]);
       this.results.set(cache[query]);
     });
   };

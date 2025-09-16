@@ -1,7 +1,6 @@
 import { Component, input, inject, signal, computed } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Films } from '../films/films';
-import { api } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'recommendations',
@@ -10,15 +9,15 @@ import { api } from '../../../api';
   styleUrl: './recommendations.scss'
 })
 export class Recommendations {
+  private http = inject(GetterClient);
   id = input('');
   items = signal([]);
   link = computed(() => `/recs/${this.id()}`);
-  private http = inject(HttpClient);
   ngOnInit(): void {
     this.fetchData(this.id());
   };
   fetchData(id: string) {
-    this.http.get(api.getRecommendationsPath(id), api.fetch_options).subscribe((data: any) => {
+    this.http.getRecommendations(id).subscribe((data: any) => {
       this.items.set(data.results);
     });
   };

@@ -1,7 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { api, genre } from '../../../api';
+import type { genre } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'app-genres',
@@ -10,7 +10,7 @@ import { api, genre } from '../../../api';
   styleUrl: './genres.scss'
 })
 export class Genres {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   loaded = signal(false);
   genres = signal<genre[]>([]);
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class Genres {
   };
   fetchData() {
     this.loaded.set(false);
-    this.http.get(api.getGenresPath(), api.fetch_options).subscribe((data: any) => {
+    this.http.getGenres().subscribe((data: any) => {
       this.genres.set(data.genres);
       this.loaded.set(true);
     });

@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Poster } from '../../componnts/poster/poster';
 import { CastAndCrew } from '../../componnts/cast-and-crew/cast-and-crew';
 import { Recommendations } from '../../componnts/recommendations/recommendations';
 import { Genres } from '../../componnts/genres/genres';
-import { toTime, floorRating, getRatingClass, api } from '../../../api';
+import { toTime, floorRating, getRatingClass } from '../../../api';
 import type { film } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'movie',
@@ -15,7 +15,7 @@ import type { film } from '../../../api';
   styleUrl: './movie.scss'
 })
 export class Movie {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   private activatedRoute = inject(ActivatedRoute);
   loaded = signal(false);
   id = signal('');
@@ -28,7 +28,7 @@ export class Movie {
   };
   fetchData(id: string) {
     this.loaded.set(false);
-    this.http.get(api.getFilmPath(id), api.fetch_options).subscribe((data: any) => {
+    this.http.getFilm(id).subscribe((data: any) => {
       this.film.set({
         duration: toTime(data.runtime), 
         rating: floorRating(data.vote_average), 

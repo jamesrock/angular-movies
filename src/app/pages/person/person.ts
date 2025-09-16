@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Filmography } from '../../componnts/filmography/filmography'; 
 import { Poster } from '../../componnts/poster/poster';
-import { person, api } from '../../../api';
+import { person } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'person',
@@ -12,7 +12,7 @@ import { person, api } from '../../../api';
   styleUrl: './person.scss'
 })
 export class Person {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   private activatedRoute = inject(ActivatedRoute);
   loaded = signal(false);
   person = signal<person>({});
@@ -23,7 +23,7 @@ export class Person {
   };
   fetchData(id: string) {
     this.loaded.set(false);
-    this.http.get(api.getPersonPath(id), api.fetch_options).subscribe((data: any) => {
+    this.http.getPerson(id).subscribe((data: any) => {
       this.person.set(data);
       this.loaded.set(true);
     });

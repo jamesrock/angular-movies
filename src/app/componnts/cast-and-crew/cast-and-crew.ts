@@ -1,8 +1,8 @@
 import { Component, input, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { People } from '../people/people';
-import { dedupe, sortByPriority, addProps, api } from '../../../api';
+import { dedupe, sortByPriority, addProps } from '../../../api';
 import type { person } from '../../../api';
+import { GetterClient } from '../../services/base';
 
 @Component({
   selector: 'cast-and-crew',
@@ -10,7 +10,7 @@ import type { person } from '../../../api';
   templateUrl: './cast-and-crew.html'
 })
 export class CastAndCrew {
-  private http = inject(HttpClient);
+  private http = inject(GetterClient);
   cast = signal<person[]>([]);
   crew = signal<person[]>([]);
   id = input('');
@@ -18,7 +18,7 @@ export class CastAndCrew {
     this.fetchData(this.id());
   };
   fetchData(id: string) {
-    this.http.get(api.getCreditsPath(id), api.fetch_options).subscribe((data: any) => {
+    this.http.getCredits(id).subscribe((data: any) => {
       this.cast.set(addProps(dedupe(data.cast, 'cast'), 'cast'));
       this.crew.set(addProps(dedupe(sortByPriority(data.crew, 'job'), 'crew'), 'crew'));
     });
