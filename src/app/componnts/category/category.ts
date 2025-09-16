@@ -12,12 +12,13 @@ export class Category implements OnInit {
   id = input('');
   items = signal([]);
   name = computed(() => genres[this.id()]);
+  link = computed(() => `/genre/${this.id()}`);
   private http = inject(HttpClient);
   ngOnInit(): void {
     this.fetchData(this.id());
   };
-  fetchData(id: string, page = '1') {
-    this.http.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${id}&page=${page}&region=GB&sort_by=popularity.desc&with_release_type=2%7C3`, api.fetch_options).subscribe((data: any) => {
+  fetchData(id: string) {
+    this.http.get(api.getCategoryPath(id), api.fetch_options).subscribe((data: any) => {
       this.items.set(data.results);
     });
   };

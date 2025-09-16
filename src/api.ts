@@ -270,6 +270,44 @@ export const api = {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MTcwMzdlNzI5ZWZlMTVmN2RiMzg0MTgyZDk5NjY3YiIsIm5iZiI6MTc1NzE1ODcxNC44OTkwMDAyLCJzdWIiOiI2OGJjMWQzYTUzODUwMTQ1MWI0ZTVhMDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.pdeAI0b67FCNnGHd7BFdpjphJQIJN1cfJ07Kkq8lznI'
     }
   },
+  getCreditsPath: function(id:string):string {
+    return `${this.base}/movie/${id}/credits`;
+  },
+  getCategoryPath: function(id:string, page:string = '1'):string {
+    return `${this.base}/discover/movie?with_genres=${id}&page=${page}&region=GB&sort_by=popularity.desc&with_release_type=2%7C3`
+  },
+  getComingSoonPath: function(page:string = '1'):string {
+    return `${this.base}/movie/upcoming?page=${page}&region=GB`;
+  },
+  getFilmographyPath: function(id:string):string {
+    return `${this.base}/person/${id}/movie_credits`;
+  },
+  getNowPlayingPath: function(page:string = '1'):string {
+    return `${this.base}/movie/now_playing?page=${page}&region=GB`;
+  },
+  getRecommendationsPath: function(id:string, page:string = '1'):string {
+    return `${this.base}/movie/${id}/recommendations?page=${page}&region=GB`;
+  },
+  getFilmPath: function(id:string):string {
+    return `${this.base}/movie/${id}`;
+  },
+  getPersonPath: function(id:string):string {
+    return `${this.base}/person/${id}`;
+  },
+  getFilmsPath: function(type:string, page:number, id:string):string {
+    // console.log('getFilms', this);
+    switch(type) {
+      case 'recs':
+        return `${this.base}/movie/${id}/recommendations?page=${page}&region=GB`;
+      case 'genre':
+        return `${this.base}/discover/movie?with_genres=${id}&page=${page}&region=GB&sort_by=popularity.desc&with_release_type=2%7C3`;
+      case 'playing':
+        return `${this.base}/movie/now_playing?page=${page}&region=GB`;
+      case 'coming':
+        return `${this.base}/movie/upcoming?page=${page}&region=GB`;
+    };
+    return '';
+  },
   getPosterPath: function(path:string, size:string) {
     return path ? (this.mediaBase + `/${size}` + path) : null;
   }

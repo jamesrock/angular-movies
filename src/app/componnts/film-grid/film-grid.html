@@ -1,1 +1,21 @@
-<p>film-grid works!</p>
+<div class="films">
+  <div class="films-head">
+    <h1>{{name()}}</h1>
+    @if (sub()) {<h2>{{sub()}}</h2>}
+  </div>
+  <div class="films-body">
+    @for (film of films(); track film.id) {
+      <a routerLink="{{`/movie/${film.id}`}}" class="category-item">
+        <poster path={{film.poster_path}} [size]="size" />
+        <div class="desc">
+          <div class="desc-name">{{film.title}}</div>
+        </div>
+      </a>
+    }
+  </div>
+  @if (page()<pages()) {
+    <div class="films-foot">
+      <button (click)="loadMore(page() + 1)">Load more</button>
+    </div>
+  }
+</div>

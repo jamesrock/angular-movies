@@ -10,6 +10,7 @@ import { dedupe, addProps, api } from '../../../api';
   templateUrl: './filmography.html'
 })
 export class Filmography {
+  private http = inject(HttpClient);
   cast = signal<film[]>([]);
   crew = signal<film[]>([]);
   id = input('');
@@ -17,10 +18,8 @@ export class Filmography {
     console.log('ngOnInit', this.id());
     this.fetchData(this.id());
   };
-  private http = inject(HttpClient);
   fetchData(id: string) {
-    this.http.get(`https://api.themoviedb.org/3/person/${id}/movie_credits`, api.fetch_options).subscribe((data: any) => {
-      console.log(data);
+    this.http.get(api.getFilmographyPath(id), api.fetch_options).subscribe((data: any) => {
       this.cast.set(addProps(dedupe(data.cast, 'cast'), 'cast'));
       this.crew.set(addProps(dedupe(data.crew, 'crew'), 'crew'));
     });

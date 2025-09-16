@@ -10,6 +10,7 @@ import type { film } from '../../../api';
   templateUrl: './films.html'
 })
 export class Films {
+  link = input('');
   name = input('');
   items = input<film[]>([]);
   size = largest_size_map['movie'];

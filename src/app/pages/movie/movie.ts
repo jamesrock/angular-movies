@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Poster } from '../../componnts/poster/poster';
@@ -14,21 +14,21 @@ import type { film } from '../../../api';
   templateUrl: './movie.html',
   styleUrl: './movie.scss'
 })
-export class Movie implements OnInit {
+export class Movie {
   private http = inject(HttpClient);
   private activatedRoute = inject(ActivatedRoute);
-  id = signal('');
   loaded = signal(false);
+  id = signal('');
   film = signal<film>({});
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.id.set(params.get('id') || '');
-      this.fetchData(params.get('id'));
+      this.fetchData(params.get('id') || '');
     });;
   };
-  fetchData(id: string | null) {
+  fetchData(id: string) {
     this.loaded.set(false);
-    this.http.get(`https://api.themoviedb.org/3/movie/${id}`, api.fetch_options).subscribe((data: any) => {
+    this.http.get(api.getFilmPath(id), api.fetch_options).subscribe((data: any) => {
       this.film.set({
         duration: toTime(data.runtime), 
         rating: floorRating(data.vote_average), 

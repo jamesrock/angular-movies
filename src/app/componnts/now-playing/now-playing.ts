@@ -14,8 +14,8 @@ export class NowPlaying implements OnInit {
   ngOnInit(): void {
     this.fetchData();
   };
-  fetchData(page = '1') {
-    this.http.get(`https://api.themoviedb.org/3/movie/now_playing?page=${page}&region=GB`, api.fetch_options).subscribe((data: any) => {
+  fetchData() {
+    this.http.get(api.getNowPlayingPath(), api.fetch_options).subscribe((data: any) => {
       this.items.set(data.results);
     });
   };

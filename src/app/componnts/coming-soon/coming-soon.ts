@@ -14,8 +14,8 @@ export class ComingSoon implements OnInit {
   ngOnInit(): void {
     this.fetchData();
   };
-  fetchData(page = '1') {
-    this.http.get(`https://api.themoviedb.org/3/movie/upcoming?page=${page}&region=GB`, api.fetch_options).subscribe((data: any) => {
+  fetchData() {
+    this.http.get(api.getComingSoonPath(), api.fetch_options).subscribe((data: any) => {
       this.items.set(data.results);
     });
   };

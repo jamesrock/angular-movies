@@ -10,15 +10,15 @@ import type { person } from '../../../api';
   templateUrl: './cast-and-crew.html'
 })
 export class CastAndCrew {
+  private http = inject(HttpClient);
   cast = signal<person[]>([]);
   crew = signal<person[]>([]);
   id = input('');
   ngOnInit(): void {
     this.fetchData(this.id());
   };
-  private http = inject(HttpClient);
   fetchData(id: string) {
-    this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits`, api.fetch_options).subscribe((data: any) => {
+    this.http.get(api.getCreditsPath(id), api.fetch_options).subscribe((data: any) => {
       this.cast.set(addProps(dedupe(data.cast, 'cast'), 'cast'));
       this.crew.set(addProps(dedupe(sortByPriority(data.crew, 'job'), 'crew'), 'crew'));
     });
