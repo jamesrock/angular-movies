@@ -1,1 +1,5 @@
-<p>recs works!</p>
+@if (loaded()===true) {
+  <main>
+    <film-grid type="recs" name="Recommendations" [sub]="sub()" [id]="id()" />
+  </main>
+}

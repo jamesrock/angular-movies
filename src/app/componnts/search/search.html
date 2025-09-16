@@ -3,7 +3,7 @@
     <input type="search" placeholder="Search film, actor, director" [formControl]="query" />
     <div class="search-results">
       @for (item of results(); track item.id) {
-        <a routerLink="{{`/${item.media_type}/${item.id}`}}" class="search-results-item" (click)="clearSearch()">
+        <a routerLink="/{{item.media_type}}/{{item.id}}" class="search-results-item" (click)="clearSearch()">
           <div class="poster-wrap">
             <poster path={{item.poster}} />
           </div>

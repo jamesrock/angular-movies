@@ -294,6 +294,9 @@ export const api = {
   getPersonPath: function(id:string):string {
     return `${this.base}/person/${id}`;
   },
+  getGenresPath: function():string {
+    return `${this.base}/genre/movie/list`;
+  },
   getFilmsPath: function(type:string, page:number, id:string):string {
     // console.log('getFilms', this);
     switch(type) {
@@ -312,7 +315,6 @@ export const api = {
     return path ? (this.mediaBase + `/${size}` + path) : null;
   }
 };
-
 
 export type person = {
   id?: string;
