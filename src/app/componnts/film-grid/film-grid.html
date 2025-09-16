@@ -5,7 +5,7 @@
   </div>
   <div class="films-body">
     @for (film of films(); track film.id) {
-      <a routerLink="/movie/{{film.id}}}" class="category-item">
+      <a routerLink="/movie/{{film.id}}" class="category-item">
         <poster path={{film.poster_path}} [size]="size" />
         <div class="desc">
           <div class="desc-name">{{film.title}}</div>

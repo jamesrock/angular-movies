@@ -1,17 +1,19 @@
-<div class="category">
-  <div class="category-head">
-    <h2>{{name()}}</h2>
-    @if (link()) {<a href="{{link()}}">view all</a>}
-  </div>
-  <div class="category-items">
-    @for (item of items(); track item.id) {
-      <a routerLink="/movie/{{item.id}}" class="category-item">
-        <poster path={{item.poster_path}} [size]="size" />
+@if (items().length) {
+  <div class="category">
+    <div class="category-head">
+      <h2>{{name()}}</h2>
+      @if (link()) {<a href="{{link()}}">view all</a>}
+    </div>
+    <div class="category-items">
+      @for (film of items(); track film.id) {
+      <a routerLink="/movie/{{film.id}}" class="category-item">
+        <poster path={{film.poster_path}} [size]="size" />
         <div class="desc">
-          <div class="desc-name">{{item.title}}</div>
-          @if (item.role) {<div class="desc-role">{{item.role}}</div>}
+          <div class="desc-name">{{film.title}}</div>
+          @if (film.role) {<div class="desc-role">{{film.role}}</div>}
         </div>
       </a>
-    }
+      }
+    </div>
   </div>
-</div>
+}
