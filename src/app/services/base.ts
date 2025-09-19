@@ -47,7 +47,6 @@ export class GetterClient {
     return `${this.base}/search/person?query=${query}`;
   };
   private getFilmsPath(type:string, page:number, id:string):string {
-    // console.log('getFilms', this);
     switch(type) {
       case 'recs':
         return this.getRecommendationsPath(id, page);
