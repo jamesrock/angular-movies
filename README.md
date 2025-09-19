@@ -1,59 +1,19 @@
-# AngularMovies
+## angular-movies
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+[angular-movies.jamesrock.me](https://angular-movies.jamesrock.me)
 
-## Development server
+This repo forms part of a project where I built the same app using Svelte, Nuxt, Next, Solid and Angular — all but one of which I'd never use before — in an effort to show that picking-up frameworks isn't quite the huge deal hiring managers seem to think it is...
 
-To start a local development server, run:
+The app itself is nothing overly fancy — just a basic film discovery site covering all the essentials one would expect such as search (actor/director/title), categories, filmographies, cast & crew. I took a classic ‘less is more’ approach with regards to the UI. It’s certainly not the most impressive thing you’ll ever see — but it is a perfectly functional single-page app fetching data from a live API, which is very much the bread and butter of modern front-end development.
 
-```bash
-ng serve
-```
+All five repos can be found here on GitHub:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+[github.com/svelte-movies](https://github.com/jamesrock/svelte-movies)  
+[github.com/nuxt-movies](https://github.com/jamesrock/nuxt-movies)  
+[github.com/nextjs-movies](https://github.com/jamesrock/nextjs-movies)  
+[github.com/solid-movies](https://github.com/jamesrock/solid-movies)  
+[github.com/angular-movies](https://github.com/jamesrock/angular-movies)  
 
-## Code scaffolding
+### Project Summary
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+After having witnessed Google products become more and more convoluted over the years, I was inclined to believe Angular wouldn’t be much fun to work with, and I wasn’t wrong. It took 2 days to get the app up and running, most of which was spent Googling even the most basic of concepts, since their official docs provide very little in the way of examples, or indeed any useful information whatsoever. I had to resort to YouTube and other sites to become familiar with concepts such as ‘directives’, ‘services’, ‘inputs’, ‘signals’ and general component structure. There were no major stumbling blocks as such, although I don’t much enjoy working with TypeScript, and it seems Angular corners you into using it, whereas the others don’t. By the end I had admittedly become a little more comfortable with TypeScript, though I’m still not entirely convinced. Perhaps my biggest gripe was having to do all data transformations on the script side, since it’s not possible to run inline js directly from a template as per every other framework covered here — that and the lack of file-based routing. Ultimately, it’s is not a framework I’ll be rushing to use again, but at least I now know what it’s all about. 
