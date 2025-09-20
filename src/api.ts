@@ -281,14 +281,14 @@ export type genre = {
 };
 
 export type film = {
-  id?: string,
-  title?: string,
-  overview?: string,
-  poster_path?: string,
-  genres?: genre[],
-  duration?: string,
-  ratingClass?: string,
-  rating?: string
+  id?: string;
+  title?: string;
+  overview?: string;
+  poster_path?: string;
+  genres?: genre[];
+  duration?: string;
+  ratingClass?: string;
+  rating?: string;
   role?: string;
 };
 
