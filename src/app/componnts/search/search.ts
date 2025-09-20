@@ -5,13 +5,7 @@ import { forkJoin } from 'rxjs';
 import { Poster } from '../poster/poster';
 import { addSearchProps, addProp } from '../../../api';
 import { GetterClient } from '../../services/base';
-
-type result = {
-  id?: string;
-  media_type?: string;
-  poster?: string;
-  name?: string;
-};
+import type { Result } from '../../../api';
 
 const cache = {};
 
@@ -23,7 +17,7 @@ const cache = {};
 })
 export class Search {
   private http = inject(GetterClient);
-  results = signal<result[]>([]);
+  results = signal<Result[]>([]);
   query = new FormControl('');
   ngOnInit():void {
     this.query.statusChanges.subscribe(() => {

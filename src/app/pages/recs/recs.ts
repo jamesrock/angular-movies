@@ -1,8 +1,9 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilmGrid } from '../../componnts/film-grid/film-grid';
-import type { Film } from '../../../api';
+import { DummyFilm } from '../../../api';
 import { GetterClient } from '../../services/base';
+import type { Film } from '../../../api';
 
 @Component({
   selector: 'recs',
@@ -15,7 +16,7 @@ export class Recs {
   private activatedRoute = inject(ActivatedRoute);
   loaded = signal(false);
   id = signal('');
-  film = signal<Film>({});
+  film = signal<Film>(DummyFilm);
   sub = computed(() => `base on ${this.film().title}`);
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {

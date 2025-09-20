@@ -300,16 +300,36 @@ export type Genre = {
 };
 
 export type Film = {
-  id?: string;
-  title?: string;
-  overview?: string;
-  poster_path?: string;
-  genres?: Genre[];
-  duration?: string;
-  ratingClass?: string;
-  role?: string;
-  runtime?: number;
-  rating?: number;
-  vote_average?: number;
+  id: string;
+  title: string;
+  overview: string;
+  poster_path: string;
+  genres: Genre[];
+  duration: string;
+  ratingClass: string;
+  role: string;
+  runtime: number;
+  rating: number;
+  vote_average: number;
 };
 
+export type Result = {
+  id?: string;
+  media_type?: string;
+  poster?: string;
+  name?: string;
+};
+
+export const DummyFilm = {
+  id: '',
+  title: '',
+  overview: '',
+  poster_path: '',
+  genres: [],
+  duration: '',
+  ratingClass: '',
+  role: '',
+  runtime: 0,
+  rating: 0,
+  vote_average: 0
+};
