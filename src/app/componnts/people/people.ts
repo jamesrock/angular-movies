@@ -2,7 +2,7 @@ import { RouterLink } from '@angular/router';
 import { Component, input } from '@angular/core';
 import { Poster } from '../poster/poster';
 import { largest_size_map } from '../../../api';
-import type { person } from '../../../api';
+import type { Person } from '../../../api';
 
 @Component({
   selector: 'people',
@@ -12,6 +12,6 @@ import type { person } from '../../../api';
 })
 export class People {
   name = input('');
-  items = input<person[]>([]);
+  items = input<Person[]>([]);
   size = largest_size_map['person'];
 }

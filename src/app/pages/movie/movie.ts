@@ -5,7 +5,7 @@ import { CastAndCrew } from '../../componnts/cast-and-crew/cast-and-crew';
 import { Recommendations } from '../../componnts/recommendations/recommendations';
 import { Genres } from '../../componnts/genres/genres';
 import { toTime, floorRating, getRatingClass } from '../../../api';
-import type { film } from '../../../api';
+import type { Film } from '../../../api';
 import { GetterClient } from '../../services/base';
 
 @Component({
@@ -19,7 +19,7 @@ export class Movie {
   private activatedRoute = inject(ActivatedRoute);
   loaded = signal(false);
   id = signal('');
-  film = signal<film>({});
+  film = signal({});
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.id.set(params.get('id') || '');
@@ -28,10 +28,10 @@ export class Movie {
   };
   fetchData(id: string) {
     this.loaded.set(false);
-    this.http.getFilm(id).subscribe((data: any) => {
+    this.http.getFilm(id).subscribe((data) => {
       this.film.set({
-        duration: toTime(data.runtime), 
-        rating: floorRating(data.vote_average), 
+        duration: toTime(data.runtime ?? 0), 
+        rating: floorRating(data.vote_average ?? 0), 
         ratingClass: `rating ${getRatingClass(data.vote_average ?? 0)}`, 
         ...data
       });

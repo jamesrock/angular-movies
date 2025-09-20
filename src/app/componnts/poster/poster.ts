@@ -8,7 +8,7 @@ import { api } from '../../../api';
   styleUrl: './poster.scss'
 })
 export class Poster {
-  path = input<any>('');
+  path = input('');
   size = input('original');
   src = computed(() => api.getPosterPath(this.path(), this.size()));
 }

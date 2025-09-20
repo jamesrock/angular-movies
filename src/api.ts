@@ -13,7 +13,7 @@ export const getRatingClass = (rating:number) => {
   };
 };
 
-export const toTime = (time:any) => {
+export const toTime = (time:number):string => {
   const 
   h = Math.floor(time / 60),
   m = Math.floor(time % 60);
@@ -266,7 +266,26 @@ export const api = {
   }
 };
 
-export type person = {
+export type Category = {
+  results: Film[];
+  total_pages: number;
+};
+
+export type Genres = {
+  genres: Genre[];
+};
+
+export type Credits = {
+  cast: Person[];
+  crew: Person[];
+};
+
+export type Filmography = {
+  cast: Film[];
+  crew: Film[];
+};
+
+export type Person = {
   id?: string;
   profile_path?: string;
   name?: string;
@@ -275,20 +294,22 @@ export type person = {
   biography?: string;
 };
 
-export type genre = {
+export type Genre = {
   name?: string;
   id?: string;
 };
 
-export type film = {
+export type Film = {
   id?: string;
   title?: string;
   overview?: string;
   poster_path?: string;
-  genres?: genre[];
+  genres?: Genre[];
   duration?: string;
   ratingClass?: string;
-  rating?: string;
   role?: string;
+  runtime?: number;
+  rating?: number;
+  vote_average?: number;
 };
 

@@ -1,6 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import type { genre } from '../../../api';
+import type { Genre } from '../../../api';
 import { GetterClient } from '../../services/base';
 
 @Component({
@@ -12,13 +12,13 @@ import { GetterClient } from '../../services/base';
 export class Genres {
   private http = inject(GetterClient);
   loaded = signal(false);
-  genres = signal<genre[]>([]);
+  genres = signal<Genre[]>([]);
   ngOnInit(): void {
     this.fetchData();  
   };
   fetchData() {
     this.loaded.set(false);
-    this.http.getGenres().subscribe((data: any) => {
+    this.http.getGenres().subscribe((data) => {
       this.genres.set(data.genres);
       this.loaded.set(true);
     });

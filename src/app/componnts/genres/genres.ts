@@ -1,5 +1,6 @@
 import { RouterLink } from '@angular/router';
 import { Component, input } from '@angular/core';
+import { Genre } from '../../../api';
 
 @Component({
   selector: 'genres',
@@ -7,5 +8,5 @@ import { Component, input } from '@angular/core';
   templateUrl: './genres.html'
 })
 export class Genres {
-  items = input<any>([]);
+  items = input<Genre[]>([]);
 }

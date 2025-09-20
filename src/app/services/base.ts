@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import type { Category, Credits, Film, Filmography, Genres, Person } from '../../api';
 
 @Injectable({
   providedIn: 'root'
@@ -60,39 +61,39 @@ export class GetterClient {
     return '';
   };
   getFilm(id:string) {
-    return this.http.get(this.getFilmPath(id), this.fetch_options);
+    return this.http.get<Film>(this.getFilmPath(id), this.fetch_options);
   };
   getPerson(id:string) {
-    return this.http.get(this.getPersonPath(id), this.fetch_options);
+    return this.http.get<Person>(this.getPersonPath(id), this.fetch_options);
   };
   getCredits(id:string) {
-    return this.http.get(this.getCreditsPath(id), this.fetch_options);
+    return this.http.get<Credits>(this.getCreditsPath(id), this.fetch_options);
   };
   getCategory(id:string) {
-    return this.http.get(this.getCategoryPath(id), this.fetch_options);
+    return this.http.get<Category>(this.getCategoryPath(id), this.fetch_options);
   };
   getComingSoon() {
-    return this.http.get(this.getComingSoonPath(), this.fetch_options);
+    return this.http.get<Category>(this.getComingSoonPath(), this.fetch_options);
   };
   getFilms(type:string, page:number, id:string) {
-    return this.http.get(this.getFilmsPath(type, page, id), this.fetch_options);
+    return this.http.get<Category>(this.getFilmsPath(type, page, id), this.fetch_options);
   };
   getFilmography(id:string) {
-    return this.http.get(this.getFilmographyPath(id), this.fetch_options);
+    return this.http.get<Filmography>(this.getFilmographyPath(id), this.fetch_options);
   };
   getNowPlaying() {
-    return this.http.get(this.getNowPlayingPath(), this.fetch_options);
+    return this.http.get<Category>(this.getNowPlayingPath(), this.fetch_options);
   };
   getRecommendations(id:string) {
-    return this.http.get(this.getRecommendationsPath(id), this.fetch_options);
+    return this.http.get<Category>(this.getRecommendationsPath(id), this.fetch_options);
   };
   getGenres() {
-    return this.http.get(this.getGenresPath(), this.fetch_options);
+    return this.http.get<Genres>(this.getGenresPath(), this.fetch_options);
   };
   getMovieResults(query:string) {
-    return this.http.get(this.getMovieResultsPath(query), this.fetch_options);
+    return this.http.get<Category>(this.getMovieResultsPath(query), this.fetch_options);
   };
   getPeopleResults(query:string) {
-    return this.http.get(this.getPeopleResultsPath(query), this.fetch_options);
+    return this.http.get<Category>(this.getPeopleResultsPath(query), this.fetch_options);
   };
 }

@@ -43,7 +43,7 @@ export class Search {
     const movieResults = this.http.getMovieResults(query);
     const peopleResults = this.http.getPeopleResults(query);
 
-    forkJoin([movieResults, peopleResults]).subscribe(([movies, people]:any) => {
+    forkJoin([movieResults, peopleResults]).subscribe(([movies, people]) => {
       cache[query] = addSearchProps([...addProp(movies.results, 'media_type', 'movie'), ...addProp(people.results, 'media_type', 'person')]);
       this.results.set(cache[query]);
     });
