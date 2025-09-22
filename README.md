@@ -10,7 +10,7 @@ All five repos can be found here on GitHub:
 
 [github.com/svelte-movies](https://github.com/jamesrock/svelte-movies)  
 [github.com/nuxt-movies](https://github.com/jamesrock/nuxt-movies)  
-[github.com/nextjs-movies](https://github.com/jamesrock/nextjs-movies)  
+[github.com/next-movies](https://github.com/jamesrock/nextjs-movies)  
 [github.com/solid-movies](https://github.com/jamesrock/solid-movies)  
 [github.com/angular-movies](https://github.com/jamesrock/angular-movies)  
 
