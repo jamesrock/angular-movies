@@ -2,7 +2,7 @@
   <div class="category">
     <div class="category-head">
       <h2>{{name()}}</h2>
-      @if (link()) {<a href="{{link()}}">view all</a>}
+      @if (link()) {<a routerLink="{{link()}}">view all</a>}
     </div>
     <div class="category-items">
       @for (film of items(); track film.id) {
